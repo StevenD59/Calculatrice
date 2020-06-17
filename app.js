@@ -18,6 +18,7 @@ document.addEventListener('keydown', (e) => {
 //On va définir l'élément click qui permet de reconnaitre au clique de la souris.
 document.addEventListener('click', (e) => {
     const valeur = e.target.dataset.key;//On récupere la touche au click, (target cible la ou on a cliquer).
+    calculer(valeur);
 })
 
 //Création d'une fonction qui va récuperer le keycode de la touche ou du bouton appuyer, et en faire quelque chose.
@@ -35,8 +36,16 @@ const calculer = (valeur) => {
                 ecran.textContent = calcul;//On met a l'intérieur de l'écran le résultat du calcul.
                 break;
 
+                //Pour toutes les autres touches
                 default:
-                    const
+                    const indexKeycode = listeKeycode.indexOf(valeur)//Recuperer l'index du keycode dans le tableau avec la fonction indexOf
+                    const touche = touches[indexKeycode];//On réuitilise cet index dans le tableau touche pour recuperer la touche appuyé.
+                    ecran.textContent += touche.innerHTML;//Afficher la valeur a l'écran.
         }
     }
 }
+
+//En cas d'erreur, l'afficher afin d'avertir l'utilisateur
+window.addEventListener('error', (e) => {
+    alert('Une erreur est survenu dans votre calcule :' + e.message)
+})
